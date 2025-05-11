@@ -61,4 +61,64 @@ Using `Mediator.Send` enforces a consistent separation of concerns and aligns wi
 
 ---
 
+### ✅ Use Descriptive and Unambiguous Names
+
+Choose names that clearly describe the purpose and intent of the item (e.g., classes, methods, variables, commands). Avoid vague, abbreviated, or misleading names.
+
+#### ✅ Do:
+
+```csharp
+public class MassUploadProductBuyingPriceCommand { }
+public class GetCustomerInvoiceDetailsQuery { }
+```
+
+#### ❌ Don't:
+
+```csharp
+public class Command1 { }
+public class GetData { }
+public class CstmrQry { }
+```
+
+**Why:**
+Clear and specific names improve code readability, make onboarding easier, and reduce the risk of misunderstandings or misuse.
+
+---
+
+### ✅ Replace Magic Numbers and Strings with Named Constants
+
+Avoid using unexplained numeric or string literals ("magic numbers" or "magic strings") directly in your code. Instead, define and use **named constants** in a centralized static class for each logical area.
+
+#### ✅ Do:
+
+```csharp
+namespace Talabeyah.Data.Common.Models
+{
+    public static class CustomerConstants
+    {
+        public const decimal MaxCustomerCompensation = 100;
+        public const decimal MaxCustomerCashback = 100;
+    }
+
+    public static class SubRegions
+    {
+        public const string SubregionCreated = "events:subregion_created";
+        public const string SubregionUpdated = "events:subregion_updated";
+        public const string SubregionDeleted = "events:subregion_deleted";
+    }
+}
+```
+
+#### ❌ Don't:
+
+```csharp
+if (compensation > 100) { /* ... */ }
+string topic = "events:subregion_created";
+```
+
+**Why:**
+Named constants in a dedicated static class improve discoverability, enforce reusability, and make it easier to modify values in the future.
+
+---
+
 *More conventions will be added below as the project evolves.*
